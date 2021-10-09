@@ -1,0 +1,18 @@
+FROM python:3
+
+# Set environment variables
+ENV PYTHONENV 1
+
+COPY requirements.txt /
+
+RUN pip ENV PYTHONUNBUFFERED 1
+install -r /requirements.txt
+RUN python manage.py runserver 0.0.0.0:8000
+# Set work directory.
+RUN mkdir /code
+WORKDIR /code
+
+# Copy project code.
+COPY . /code/
+
+EXPOSE 8000
